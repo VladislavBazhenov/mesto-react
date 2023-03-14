@@ -1,0 +1,14 @@
+.card-grid__element {
+  box-sizing: border-box;
+  font-size: 0;
+  list-style: none;
+  width: 282px;
+  position: relative;
+}
+
+
+@media screen and (min-width:768px) {
+  .card-grid__element {
+    margin: 0 auto;
+}
+}

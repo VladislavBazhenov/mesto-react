@@ -1,0 +1,12 @@
+.card-grid__item {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 282px;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.card-grid__item:hover {
+  opacity: .5;
+}

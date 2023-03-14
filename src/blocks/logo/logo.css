@@ -1,0 +1,15 @@
+.logo {
+  background-repeat: no-repeat;
+  width: 103.74px;
+  height: 24.4px;
+  padding: 0 189.26px 30.6px 27px;
+}
+
+@media screen and (min-width:1024px) {
+    .logo {
+      width: 142px;
+      height: 33px;
+      padding-left: 0;
+      padding-bottom: 41px;
+    }
+  }

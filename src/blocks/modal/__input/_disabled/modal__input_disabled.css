@@ -1,0 +1,8 @@
+.modal__input_disabled {
+  background-color: #E5E5E5;
+  color: #000;
+  cursor: default;
+  pointer-events: none;
+  border: 1px solid #000;
+  opacity: .2;
+}

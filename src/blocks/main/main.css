@@ -1,0 +1,11 @@
+.main {
+  padding: 37.25px 19px 48px;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width:1024px) {
+  .main {
+    padding: 39.25px 0 67px;
+  }
+}
+

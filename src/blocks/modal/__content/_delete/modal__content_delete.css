@@ -1,0 +1,9 @@
+.modal__content_delete { 
+  min-height: fit-content;
+}
+
+@media screen and (min-width:1024px) {
+  .modal__content_delete  {
+    padding: 34px 36px 36px;
+  }
+}

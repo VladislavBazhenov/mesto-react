@@ -1,0 +1,15 @@
+.card-grid__likeButton {
+  background: no-repeat url('../../../images/heart__disable.svg');
+  background-size: cover;
+  box-sizing: border-box;
+  border: none;
+  width: 22px;
+  height: 19px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.card-grid__likeButton:hover {
+  opacity: .5;
+  transition: .3s;
+}
