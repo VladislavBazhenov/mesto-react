@@ -1,43 +1,40 @@
 import React from "react";
 
-function Main() {
+function Main(props) {
   return (
     <main className="main">
       <section className="profile">
         <div
           className="profile__avatar-container"
           onClick={() => {
-            const modalAvatar = document.querySelector(".modal-avatar");
-            modalAvatar.classList.add("modal_active");
+            props.onEditAvatar();
           }}
         >
           <img
-            src="<%=require('./images/Jak_Iv_Kusto.jpg')%>"
+            src={props.avatar}
             className="profile__avatar"
             alt="Аватар профиля"
           />
         </div>
         <div className="profile__container">
           <div className="profile__info">
-            <h1 className="profile__name">Влад</h1>
+            <h1 className="profile__name">{props.name}</h1>
             <button
               type="button"
               className="profile__editButton button-hover"
               onClick={() => {
-                const modalEditProfile = document.querySelector(".modal-edit");
-                modalEditProfile.classList.add("modal_active");
+                props.onEditProfile();
               }}
             ></button>
           </div>
-          <p className="profile__profession">Тест</p>
+          <p className="profile__profession">{props.description}</p>
         </div>
         <div>
           <button
             type="button"
             className="profile__addButton button-hover"
             onClick={() => {
-              const modalAddCard = document.querySelector(".modal-add");
-              modalAddCard.classList.add("modal_active");
+              props.onAddPlace();
             }}
           ></button>
         </div>
