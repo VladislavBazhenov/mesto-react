@@ -5,6 +5,52 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
+  //переменные состояния попапов
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+  }
+
+  const onEditAvatar = () => {
+    setIsEditAvatarPopupOpen(true);
+  };
+  const onEditProfile = () => {
+    setIsEditProfilePopupOpen(true);
+  };
+  const onAddPlace = () => {
+    setIsAddPlacePopupOpen(true);
+  };
+
+  //переменные состояния апи
+  const [userName, setUserName] = useState([]);
+  const [userDescription, setUserDescription] = useState([]);
+  const [userAvatar, setUserAvatar] = useState([]);
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    api
+      .getUserData()
+      .then((res) => {
+        setUserName(res.name);
+        setUserDescription(res.about);
+        setUserAvatar(res.avatar);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    api.getInitialCards().then((res) => {
+      setCards(res);
+    });
+  }, []);
+
   return (
     <div className="App">
       <div className="page">
