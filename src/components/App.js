@@ -5,17 +5,20 @@ import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import api from "../utils/api";
+import { initialCards } from "../utils/constants";
 
 function App() {
   //переменные состояния попапов
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setSelectedCard({});
   }
 
   const onEditAvatar = () => {
@@ -35,25 +38,17 @@ function App() {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api
-      .getUserData()
-      .then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
+    Promise.all([api.getUserData(), api.getInitialCards()])
+      .then(([userData, initialCards]) => {
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        setCards(initialCards);
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
-
-  useEffect(() => {
-    api.getInitialCards().then((res) => {
-      setCards(res);
-    });
-  }, []);
-
-  console.log(cards);
 
   return (
     <div className="App">
@@ -66,6 +61,8 @@ function App() {
           name={userName}
           description={userDescription}
           avatar={userAvatar}
+          cards={cards}
+          onCardClick={setSelectedCard}
         />
         <Footer />
       </div>
@@ -159,20 +156,7 @@ function App() {
         name="delete"
         valueSubmit="Да"
       ></PopupWithForm>
-      <ImagePopup></ImagePopup>
-      <template id="template-cards">
-        <li className="card-grid__element">
-          <img className="card-grid__item" />
-          <button type="button" className="urn button-hover"></button>
-          <div className="card-grid__name">
-            <h2 className="card-grid__title"></h2>
-            <div className="card-grid__likes">
-              <button type="button" className="card-grid__likeButton"></button>
-              <p className="card-grid__like-counter">0</p>
-            </div>
-          </div>
-        </li>
-      </template>
+      <ImagePopup card={selectedCard} onClose={closeAllPopups}></ImagePopup>
     </div>
   );
 }

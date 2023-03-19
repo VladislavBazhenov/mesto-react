@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "./Card";
 
 function Main(props) {
   return (
@@ -40,7 +41,20 @@ function Main(props) {
         </div>
       </section>
       <section className="places" aria-label="Фото красивых мест">
-        <ul className="card-grid"></ul>
+        <ul className="card-grid">
+          {props.cards.map((card) => {
+            return (
+              <Card
+                key={card._id}
+                name={card.name}
+                link={card.link}
+                likes={card.likes}
+                owner={card.owner}
+                onCardClick={props.onCardClick}
+              />
+            );
+          })}
+        </ul>
       </section>
     </main>
   );
