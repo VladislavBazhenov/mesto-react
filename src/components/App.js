@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import api from "../utils/api";
-import { initialCards } from "../utils/constants";
 
 function App() {
   //переменные состояния попапов
@@ -31,25 +29,6 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
-  //переменные состояния апи
-  const [userName, setUserName] = useState([]);
-  const [userDescription, setUserDescription] = useState([]);
-  const [userAvatar, setUserAvatar] = useState([]);
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserData(), api.getInitialCards()])
-      .then(([userData, initialCards]) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        setCards(initialCards);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
   return (
     <div className="App">
       <div className="page">
@@ -58,10 +37,6 @@ function App() {
           onEditAvatar={onEditAvatar}
           onEditProfile={onEditProfile}
           onAddPlace={onAddPlace}
-          name={userName}
-          description={userDescription}
-          avatar={userAvatar}
-          cards={cards}
           onCardClick={setSelectedCard}
         />
         <Footer />
