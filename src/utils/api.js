@@ -1,4 +1,3 @@
-import React from "react";
 import { apiConfig } from "../utils/constants";
 
 class Api {
