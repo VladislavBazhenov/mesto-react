@@ -72,8 +72,8 @@ function App() {
             required
             id="name-input"
             type="text"
-            minlength="2"
-            maxlength="40"
+            minLength="2"
+            maxLength="40"
             className="modal__input modal__input_type_name"
             name="username"
             placeholder="Введите имя"
@@ -85,8 +85,8 @@ function App() {
             required
             id="profession-input"
             type="text"
-            minlength="2"
-            maxlength="200"
+            minLength="2"
+            maxLength="200"
             className="modal__input modal__input_type_profession"
             name="profession"
             placeholder="Введите профессию"
@@ -106,8 +106,8 @@ function App() {
             required
             id="placename-input"
             type="text"
-            minlength="2"
-            maxlength="30"
+            minLength="2"
+            maxLength="30"
             className="modal__input modal__input_type_place-name"
             name="name"
             placeholder="Название"
