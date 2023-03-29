@@ -43,22 +43,15 @@ class Api {
       method: "PATCH",
       headers: this.headers,
       body: JSON.stringify({
-        name: data.username,
-        about: data.profession,
+        name: data.name,
+        about: data.about,
       }),
     }).then(this._handleResponse);
   }
 
-  setLike(cardId) {
+  changeLikeCardStatus(cardId, isLiked) {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this.headers,
-    }).then(this._handleResponse);
-  }
-
-  removeLike(id) {
-    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-      method: "DELETE",
+      method: `${isLiked ? "DELETE" : "PUT"}`,
       headers: this.headers,
     }).then(this._handleResponse);
   }

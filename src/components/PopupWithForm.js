@@ -12,7 +12,12 @@ function PopupWithForm(props) {
           className="modal__close button-hover"
           onClick={props.onClose}
         ></button>
-        <form className="modal__form" name={props.name} noValidate>
+        <form
+          className="modal__form"
+          name={props.name}
+          onSubmit={props.onSubmit}
+          noValidate
+        >
           <h3 className="modal__title">{props.title}</h3>
           {props.children}
           <input

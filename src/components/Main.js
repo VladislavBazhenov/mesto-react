@@ -1,26 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Card from "./Card";
 import api from "../utils/api";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function Main(props) {
-  //переменные состояния апи
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
+  const currentUser = useContext(CurrentUserContext);
 
-  useEffect(() => {
-    Promise.all([api.getUserData(), api.getInitialCards()])
-      .then(([userData, initialCards]) => {
-        setUserName(userData.name);
-        setUserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        setCards(initialCards);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
   return (
     <main className="main">
       <section className="profile">
@@ -31,14 +16,14 @@ function Main(props) {
           }}
         >
           <img
-            src={userAvatar}
+            src={currentUser.avatar}
             className="profile__avatar"
             alt="Аватар профиля"
           />
         </div>
         <div className="profile__container">
           <div className="profile__info">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               type="button"
               className="profile__editButton button-hover"
@@ -47,7 +32,7 @@ function Main(props) {
               }}
             ></button>
           </div>
-          <p className="profile__profession">{userDescription}</p>
+          <p className="profile__profession">{currentUser.about}</p>
         </div>
         <div>
           <button
@@ -61,15 +46,18 @@ function Main(props) {
       </section>
       <section className="places" aria-label="Фото красивых мест">
         <ul className="card-grid">
-          {cards.map((card) => {
+          {props.cards.map((card) => {
             return (
               <Card
                 key={card._id}
+                _id={card._id}
                 name={card.name}
                 link={card.link}
                 likes={card.likes}
                 owner={card.owner}
                 onCardClick={props.onCardClick}
+                onCardLike={props.onCardLike}
+                onCardDelete={props.onCardDelete}
               />
             );
           })}
