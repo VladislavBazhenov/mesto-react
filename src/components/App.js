@@ -74,7 +74,9 @@ function App() {
     api
       .deleteCard(card._id)
       .then(() => {
-        setCards(cards.filter((c) => c._id !== card._id));
+        setCards((prevCards) => {
+          return prevCards.filter((c) => c._id !== card._id);
+        });
       })
       .catch(handleApiError);
   }

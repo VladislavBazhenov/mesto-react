@@ -4,8 +4,8 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     setName(currentUser.name);
@@ -45,7 +45,7 @@ function EditProfilePopup(props) {
           className="modal__input modal__input_type_name"
           name="username"
           placeholder="Введите имя"
-          value={name}
+          value={name || ""}
           onChange={handleChangeName}
         />
         <span className="modal__input-error name-input-error"></span>
@@ -60,7 +60,7 @@ function EditProfilePopup(props) {
           className="modal__input modal__input_type_profession"
           name="profession"
           placeholder="Введите профессию"
-          value={description}
+          value={description || ""}
           onChange={handleChangeDescription}
         />
         <span className="modal__input-error profession-input-error"></span>
