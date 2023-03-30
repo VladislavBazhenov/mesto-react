@@ -18,8 +18,8 @@ function EditProfilePopup(props) {
   function handleChangeDescription(e) {
     setDescription(e.target.value);
   }
-  function handleSubmit(event) {
-    event.preventDefault();
+  function handleSubmit(e) {
+    e.preventDefault();
     props.onUpdateUser({
       name,
       about: description,
